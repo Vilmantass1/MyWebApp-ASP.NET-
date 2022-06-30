@@ -5,6 +5,7 @@ using static MyFirstWebApp.Services.Contracts.IjokeServise;
 
 namespace MyFirstWebApp.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
         

@@ -1,3 +1,4 @@
+using Microsoft.OpenApi.Models;
 using MyFirstWebApp.Services;
 using static MyFirstWebApp.Services.Contracts.IjokeServise;
 using static MyFirstWebApp.Services.Contracts.ILoggerService;
@@ -14,9 +15,16 @@ builder.Host.ConfigureServices((host, services) =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen(x =>
+{
+    x.SwaggerDoc("v1", new OpenApiInfo { Title = "Mano pirmas Web projektas API", Version = "v1" });
+});
+
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -27,6 +35,14 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mano pirmas web projektas API Services");
+    c.RoutePrefix = "WebServices";
+});
+
 
 app.UseRouting();
 
