@@ -1,0 +1,23 @@
+﻿@model JokeModel
+@{
+    ViewData["Title"] = "Jokes";
+}
+
+<h1>@Model.Title</h1>
+
+<p>@Model.Description</p>
+
+<h2>@ViewBag.Joke</h2>
+
+@{
+    var counter =1;
+
+    foreach (var joke in @Model.Jokes)
+
+    {
+        <h2>@counter:@joke.Joke</h2>
+        <br/>
+        counter++;
+    }
+
+}
